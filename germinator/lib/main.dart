@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:germinator/screens/landing.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,16 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Germinator',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Germinator'),
-            backgroundColor: Colors.green,
-          ),
-          body: Center(
-            child: Text('Hello World'),
-          ),
-        ));
+    return const MaterialApp(
+      title: "Germinator",
+      home: LandingWidget(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
