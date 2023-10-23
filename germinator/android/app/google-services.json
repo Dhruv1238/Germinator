@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310120996111",
+    "project_id": "germinator-a823f",
+    "storage_bucket": "germinator-a823f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310120996111:android:ce9854108736349355727a",
+        "android_client_info": {
+          "package_name": "com.example.germinator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDetiaVI0Hnum1W-LZmsASxM_Xj514bm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
