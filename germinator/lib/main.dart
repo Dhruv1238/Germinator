@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Germinator",
-      home: LandingWidget(),
+      home: Landing(),
       debugShowCheckedModeBanner: false,
     );
   }
