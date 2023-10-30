@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+// import 'package:germinator/screens/login.dart';
+// import 'package:germinator/screens/signup.dart';
 
 class Landing extends StatelessWidget {
   const Landing({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Landing Page'),
-      // ),
       body: Stack(
         children: <Widget>[
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              margin: EdgeInsets.only(top: 50),
-              child: Text(
+              margin: const EdgeInsets.only(top: 50),
+              child: const Text(
                 'Make your Life',
                 style: TextStyle(
                   fontSize: 50,
@@ -27,8 +26,8 @@ class Landing extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              margin: EdgeInsets.only(top: 100),
-              child: Text(
+              margin: const EdgeInsets.only(top: 100),
+              child: const Text(
                 'Greener!',
                 style: TextStyle(
                   fontSize: 50,
@@ -45,36 +44,66 @@ class Landing extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin:
-                  EdgeInsets.only(bottom: 150), // Adjust the value as needed
+              margin: const EdgeInsets.only(
+                  bottom: 150), // Adjust the value as needed
               child: ElevatedButton(
                 onPressed: () {
-                  print('Button Pressed');
+                  Navigator.pushNamed(context, '/login');
                 },
-                child: Text('Button'),
+                child: Text('Login'),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.green),
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(fontSize: 20),
+                    const TextStyle(fontSize: 20),
                   ),
                   padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 100, vertical: 25),
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 25),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
-                      side: BorderSide(color: Colors.green),
+                      side: const BorderSide(color: Colors.green),
                     ),
                   ),
                 ),
               ),
             ),
-          )
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(
+                  bottom: 75), // Adjust the value as needed
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signup');
+                },
+                child: Text('Signup'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                    const TextStyle(fontSize: 20),
+                  ),
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 25),
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: const BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
-        
       ),
     );
   }
