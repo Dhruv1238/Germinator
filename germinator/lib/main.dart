@@ -4,9 +4,14 @@ import 'package:germinator/screens/login.dart';
 import 'package:germinator/screens/signup.dart';
 import 'package:germinator/screens/plant.dart';
 import 'package:germinator/screens/plantinfo.dart';
-// import 'package:germinator/screens/profile.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MainApp());
 }
 

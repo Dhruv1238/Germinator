@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +42,14 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: Padding(
               padding: EdgeInsets.all(30.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
@@ -47,6 +57,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -62,8 +73,22 @@ class LoginPage extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(bottom: 150),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/plant');
+                onPressed: () async {
+                  print(emailController.text);
+                  print(passwordController.text);
+                  try {
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: emailController.text,
+                      password: passwordController.text
+                    );
+                    Navigator.pushNamed(context, '/plant');
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      print('No user found for that email.');
+                    } else if (e.code == 'wrong-password') {
+                      print('Wrong password provided for that user.');
+                    }
+                  }
                 },
                 child: Text('Login'),
                 style: ButtonStyle(
