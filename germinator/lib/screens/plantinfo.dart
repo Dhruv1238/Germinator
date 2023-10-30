@@ -44,6 +44,7 @@ class _PlantCarePageState extends State<PlantCarePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Plant Care'),
+        backgroundColor: Colors.green,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
