@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Plant {
   final String name;
@@ -27,12 +28,27 @@ class _PlantPageState extends State<PlantPage2> {
     });
   }
 
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/login',
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Plants'),
         backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            onPressed: _logout,
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: plants.length,
