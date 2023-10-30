@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -8,6 +9,11 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +33,14 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
           ),
-          const Center(
+          Center(
             child: Padding(
               padding: EdgeInsets.all(30.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
@@ -41,6 +48,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -49,6 +57,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: confirmPasswordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
@@ -75,8 +84,32 @@ class _SignupPageState extends State<SignupPage> {
             child: Container(
               margin: const EdgeInsets.only(bottom: 150),
               child: ElevatedButton(
-                onPressed: () {
-                  print('Signup Button Pressed');
+                onPressed: () async {
+                  print(passwordController.text);
+                  print(confirmPasswordController.text);
+                  print(emailController.text);
+                  if (passwordController.text ==
+                      confirmPasswordController.text) {
+                    try {
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text);
+                      print('User registered successfully');
+                      Navigator.pushNamed(context, '/login');
+                    } on FirebaseAuthException catch (e) {
+                      print(e.code);
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  } else {
+                    print('Passwords do not match');
+                  }
                 },
                 child: Text('Signup'),
                 style: ButtonStyle(
