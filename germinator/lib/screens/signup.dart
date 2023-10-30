@@ -13,6 +13,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +100,23 @@ class _SignupPageState extends State<SignupPage> {
                       Navigator.pushNamed(context, '/login');
                     } on FirebaseAuthException catch (e) {
                       print(e.code);
-                      if (e.code == 'weak-password') {
-                        print('The password provided is too weak.');
+                      if (e.code == 'invalid-email') {
+                        errorMessage = 'Invalid email address';
+                      } else if (e.code == 'weak-password') {
+                        errorMessage = 'The password provided is too weak.';
                       } else if (e.code == 'email-already-in-use') {
-                        print('The account already exists for that email.');
+                        errorMessage =
+                            'The account already exists for that email.';
                       }
+                      setState(() {});
                     } catch (e) {
-                      print(e);
+                      errorMessage = (e.toString());
+                      setState(() {});
                     }
                   } else {
-                    print('Passwords do not match');
+                    errorMessage = 'Passwords do not match';
                   }
+                  setState(() {});
                 },
                 child: Text('Signup'),
                 style: ButtonStyle(
@@ -129,6 +136,18 @@ class _SignupPageState extends State<SignupPage> {
                       side: const BorderSide(color: Colors.green),
                     ),
                   ),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 785),
+              child: Text(
+                errorMessage,
+                style: TextStyle(
+                  color: Colors.red,
                 ),
               ),
             ),
