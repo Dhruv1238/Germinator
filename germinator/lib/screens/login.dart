@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +79,21 @@ class _LoginPageState extends State<LoginPage> {
                   print(passwordController.text);
                   try {
                     await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.text,
-                      password: passwordController.text
-                    );
+                        email: emailController.text,
+                        password: passwordController.text);
                     Navigator.pushNamed(context, '/plant');
                   } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      print('No user found for that email.');
-                    } else if (e.code == 'wrong-password') {
-                      print('Wrong password provided for that user.');
+                    // Handle specific error codes and set error message
+                    if (e.code == 'invalid-email') {
+                      errorMessage = 'Invalid email address';
+                    } else if (e.code == 'invalid-login-credentials') {
+                      errorMessage = 'Wrong password';
+                    } else {
+                      errorMessage = 'An error occurred. Please try again.';
                     }
+
+                    // Update the UI with the error message
+                    setState(() {});
                   }
                 },
                 child: Text('Login'),
@@ -111,6 +117,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+                margin: const EdgeInsets.only(bottom: 775),
+                child: Text(
+                  errorMessage,
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                )),
           )
         ],
       ),
