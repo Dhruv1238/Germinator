@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:germinator/screens/landing.dart';
 import 'package:germinator/screens/login.dart';
+import 'package:germinator/screens/plant2.dart';
 import 'package:germinator/screens/signup.dart';
 import 'package:germinator/screens/plant.dart';
 import 'package:germinator/screens/plantinfo.dart';
@@ -35,6 +36,9 @@ class MainApp extends StatelessWidget {
         }
         if (settings.name == '/plantcare') {
           return MaterialPageRoute(builder: (context) => PlantCarePage());
+        }
+        if (settings.name == '/plant2') {
+          return MaterialPageRoute(builder: (context) => PlantPage2());
         }
         return null;
       },

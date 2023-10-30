@@ -12,13 +12,13 @@ class _PlantCarePageState extends State<PlantCarePage> {
       plantName: 'Snake Plant',
       description:
           'The snake plant is a popular indoor plant known for its hardiness and air purifying qualities.',
-      imageUrl: 'https://example.com/snake_plant_image.jpg',
+      imageUrl: 'https://i.ibb.co/KGy3thF/plan2.png',
     ),
     PlantCard(
       plantName: 'Fiddle Leaf Fig',
       description:
           'The fiddle leaf fig is a trendy houseplant known for its large, glossy leaves and elegant appearance.',
-      imageUrl: 'https://example.com/fiddle_leaf_fig_image.jpg',
+      imageUrl: 'https://i.ibb.co/DQKLhW3/plant1.png',
     ),
   ];
 
@@ -116,9 +116,21 @@ class PlantCard extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Add your logic for the 'Add' button here
+                    Navigator.pushNamed(context, '/plant2');
                   },
                   child: Text('Add'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(fontSize: 20),
+                    ),
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.symmetric(horizontal: 16.0),
+                    ),
+                  ),
                 ),
               ],
             ),

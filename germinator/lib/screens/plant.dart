@@ -16,17 +16,15 @@ class PlantPage extends StatefulWidget {
 class _PlantPageState extends State<PlantPage> {
   List<Plant> plants = [
     Plant('Rose', 'Every 7 days',
-        'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg'),
+        'https://i.ibb.co/DQKLhW3/plant2.png'),
     Plant('Cactus', 'Every 14 days',
-        'https://images.pexels.com/photos/2132224/pexels-photo-2132224.jpeg'),
-    Plant('Cactus', 'Every 14 days',
-        'https://images.pexels.com/photos/2132224/pexels-photo-2132224.jpeg'),
+        'https://i.ibb.co/KGy3thF/plan1.png'),
   ];
 
   void addPlant() {
     setState(() {
       plants.add(Plant('New Plant', 'Every 7 days',
-          'https://images.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg'));
+          'https://i.ibb.co/DQKLhW3/plant2.png'));
     });
   }
 
